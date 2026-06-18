@@ -13,6 +13,7 @@ repositories {
 ext {
     junitVersion = '5.10.2'
     springVersion = '5.3.37'
+    springSecurityVersion = '5.8.9'
     lombokVersion = '1.18.30'
 }
 
@@ -25,7 +26,7 @@ tasks.withType(JavaCompile) {
 
 dependencies {
 
-    implementation ("org.springframework:spring -context:${springVersion}")
+    implementation("org.springframework:spring-context:${springVersion}")
             { exclude group: 'commons-logging', module: 'commons-logging' }
     implementation "org.springframework:spring-webmvc:${springVersion}"
     implementation 'javax.inject:javax.inject:1'
@@ -33,7 +34,7 @@ dependencies {
     implementation 'org.aspectj:aspectjrt:1.9.20'
     implementation 'org.aspectj:aspectjweaver:1.9.20'
 
-    implementation('javax.servlet:javax.servlet -api:4.0.1')
+    implementation('javax.servlet:javax.servlet-api:4.0.1')
     compileOnly 'javax.servlet.jsp:jsp-api:2.1'
     implementation 'javax.servlet:jstl:1.2'
     implementation 'org.apache.logging.log4j:log4j-api:2.18.0'
@@ -47,8 +48,20 @@ dependencies {
 
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.4'
 
+    // ── auth 모듈을 위해 추가 ──
+    implementation "org.springframework.security:spring-security-web:${springSecurityVersion}"
+    implementation "org.springframework.security:spring-security-config:${springSecurityVersion}"
+    implementation "org.springframework.security:spring-security-core:${springSecurityVersion}"
+
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+    implementation 'com.mysql:mysql-connector-j:8.2.0'
+    implementation 'com.zaxxer:HikariCP:4.0.3'
+
     testImplementation "org.springframework:spring-test:${springVersion}"
-    testCompileOnly"org.projectlombok:lombok:${lombokVersion}"
+    testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
     testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
