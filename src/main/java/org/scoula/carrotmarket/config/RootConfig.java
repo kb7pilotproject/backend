@@ -1,43 +1,52 @@
-package org.scoula.carrotmarket.config;
-// HikariCP 기반 DB 설정
+package org.scoula.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import org.springframework.beans.factory.annotation.Value;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
 
 @Configuration
+@PropertySource({"classpath:/application.properties"})
+@MapperScan(basePackages = {
+        "org.scoula.carrotmarket.comment.mapper",
+        "org.scoula.carrotmarket.wishlist.mapper",
+        "org.scoula.carrotmarket.product.mapper",
+        "org.scoula.carrotmarket.user.mapper"
+})
+@ComponentScan(basePackages={
+        "org.scoula.carrotmarket.comment.service",
+        "org.scoula.carrotmarket.wishlist.service",
+        "org.scoula.carrotmarket.product.service",
+        "org.scoula.carrotmarket.user.service"
+})
 public class RootConfig {
-    // application.properties에서 MySQL 접속 정보를 읽어옴
+    //프로젝트 전체에서 사용할 중요한 싱글톤 빈 생성 정의
+    @Autowired
+    ApplicationContext applicationContext;
+
     @Value("${jdbc.driver}")
-    private String driver;
+    String driver;
 
     @Value("${jdbc.url}")
-    private String url;
+    String url;
 
     @Value("${jdbc.username}")
-    private String username;
+    String username;
 
     @Value("${jdbc.password}")
-    private String password;
+    String password;
 
-    // db.properties에서 Hikari 설정값 읽어옴
-    // 풀에 최대 몇 개까지 연결을 만들어둘지
-    @Value("${hikari.maximumPoolSize:10}")
-    private int maximumPoolSize;
-
-    // 평소에 미리 대기시켜둘 최소 연결 개수
-    @Value("${hikari.minimumIdle:2}")
-    private int minimumIdle;
-
-    // 연결 요청 후 이 시간안에 못 받으면 타임아웃
-    @Value("${hikari.connectionTimeout:30000}")
-    private long connectionTimeout;
-
-    // 위에서 읽은 값들로 DB 빈을 하나 만들어서 등록
     @Bean
     public DataSource dataSource() {
         HikariConfig config = new HikariConfig();
@@ -45,10 +54,21 @@ public class RootConfig {
         config.setJdbcUrl(url);
         config.setUsername(username);
         config.setPassword(password);
-        config.setMaximumPoolSize(maximumPoolSize);
-        config.setMinimumIdle(minimumIdle);
-        config.setConnectionTimeout(connectionTimeout);
-        config.setPoolName("ccarrot-hikari-pool");
-        return new HikariDataSource(config);
+        HikariDataSource dataSource = new HikariDataSource(config);
+        return dataSource;
+    }
+
+    @Bean
+    public SqlSessionFactory sqlSessionFactory() throws Exception {
+        SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
+        sqlSessionFactory.setConfigLocation(applicationContext.getResource("classpath:/mybatis-config.xml"));
+        sqlSessionFactory.setDataSource(dataSource());
+        return (SqlSessionFactory) sqlSessionFactory.getObject();
+    }
+
+    @Bean
+    public DataSourceTransactionManager transactionManager(){
+        DataSourceTransactionManager manager = new DataSourceTransactionManager(dataSource());
+        return manager;
     }
 }
