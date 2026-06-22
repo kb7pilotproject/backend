@@ -4,6 +4,7 @@ package org.scoula.carrotmarket.config;
 // SecurityConfig와 DBConfig를 가져와서 합치기
 
 import org.springframework.context.annotation.*;
+import org.springframework.security.access.SecurityConfig;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
