@@ -1,4 +1,4 @@
 package org.scoula.carrotmarket.product.mapper;
 
-public class CommentMapper {
+public class ProductMapper {
 }

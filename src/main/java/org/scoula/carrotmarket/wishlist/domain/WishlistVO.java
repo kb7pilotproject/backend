@@ -1,4 +1,4 @@
 package org.scoula.carrotmarket.wishlist.domain;
 
-public class CommentVO {
+public class WishlistVO {
 }

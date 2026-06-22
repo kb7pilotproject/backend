@@ -1,4 +1,4 @@
 package org.scoula.carrotmarket.wishlist.service;
 
-public interface CommentService {
+public interface WishlistService {
 }

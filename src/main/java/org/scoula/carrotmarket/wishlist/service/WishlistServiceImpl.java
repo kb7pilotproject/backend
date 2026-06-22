@@ -1,4 +1,4 @@
 package org.scoula.carrotmarket.wishlist.service;
 
-public class CommentServiceImpl {
+public class WishlistServiceImpl {
 }
