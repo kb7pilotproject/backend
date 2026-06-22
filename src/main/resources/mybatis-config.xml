@@ -8,6 +8,18 @@
     </settings>
 
     <typeAliases>
-        <typeAlias alias="BoardVO" type="org.scoula.board.domain.BoardVO" />
+
+            <typeAlias alias="CommentVO"
+                       type="org.scoula.carrotmarket.comment.domain.CommentVO"/>
+
+            <typeAlias alias="UserVO"
+                       type="org.scoula.carrotmarket.user.domain.UserVO"/>
+
+            <typeAlias alias="ProductVO"
+                       type="org.scoula.carrotmarket.product.domain.ProductVO"/>
+
+            <typeAlias alias="WishlistVO"
+                   type="org.scoula.carrotmarket.wishlist.domain.WishlistVO"/>
+
     </typeAliases>
 </configuration>
