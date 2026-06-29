@@ -1,4 +1,4 @@
-package org.scoula.config;
+package org.scoula.carrotmarket.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

@@ -21,7 +21,7 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{org.scoula.config.RootConfig.class};
+        return new Class[]{org.scoula.carrotmarket.config.RootConfig.class};
         // new int[] {1, 2, 3}
     }
 
