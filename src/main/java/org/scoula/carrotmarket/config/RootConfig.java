@@ -31,7 +31,6 @@ import javax.sql.DataSource;
         "org.scoula.carrotmarket.user.service"
 })
 public class RootConfig {
-    //프로젝트 전체에서 사용할 중요한 싱글톤 빈 생성 정의
     @Autowired
     ApplicationContext applicationContext;
 
