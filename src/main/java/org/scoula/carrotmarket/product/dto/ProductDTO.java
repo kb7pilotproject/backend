@@ -1,12 +1,12 @@
 package org.scoula.carrotmarket.product.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import java.time.LocalDateTime;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import org.scoula.carrotmarket.product.domain.ProductVO;
-
-import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -14,45 +14,44 @@ import java.time.LocalDateTime;
 @Builder
 public class ProductDTO {
 
+
     private Long productId;
     private Long userId;
-
     private String title;
-    private Integer price;
+    private int price;
     private String imageUrl;
     private String category;
     private String description;
     private String status;
-
     private LocalDateTime createdAt;
 
-    // DTO -> VO
+
     public ProductVO toVo() {
         return ProductVO.builder()
-                .productId(productId)
-                .userId(userId)
-                .title(title)
-                .price(price)
-                .imageUrl(imageUrl)
-                .category(category)
-                .description(description)
-                .status(status)
-                .createdAt(createdAt)
+                .productId(this.productId)
+                .userId(this.userId)
+                .title(this.title)
+                .price(this.price)
+                .imageUrl(this.imageUrl)
+                .category(this.category)
+                .description(this.description)
+                .status(this.status)
+                .createdAt(this.createdAt)
                 .build();
     }
 
-    // VO -> DTO
+
     public static ProductDTO of(ProductVO vo) {
         return vo == null ? null : ProductDTO.builder()
-                .productId(vo.getProductId())
-                .userId(vo.getUserId())
-                .title(vo.getTitle())
-                .price(vo.getPrice())
-                .imageUrl(vo.getImageUrl())
-                .category(vo.getCategory())
-                .description(vo.getDescription())
-                .status(vo.getStatus())
-                .createdAt(vo.getCreatedAt())
-                .build();
+                                   .productId(vo.getProductId())
+                                   .userId(vo.getUserId())
+                                   .title(vo.getTitle())
+                                   .price(vo.getPrice())
+                                   .imageUrl(vo.getImageUrl())
+                                   .category(vo.getCategory())
+                                   .description(vo.getDescription())
+                                   .status(vo.getStatus())
+                                   .createdAt(vo.getCreatedAt())
+                                   .build();
     }
 }
