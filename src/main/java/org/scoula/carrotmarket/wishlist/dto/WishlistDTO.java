@@ -1,8 +1,5 @@
 package org.scoula.carrotmarket.wishlist.dto;
 
-<<<<<<< HEAD
-public class WishlistDTO {
-=======
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
 public class WishlistDTO {
     private Integer wishlistId;
     private Integer userId;
@@ -42,5 +40,4 @@ public class WishlistDTO {
                                    .build();
 
     }
->>>>>>> 2f65b79ac5946ca1434dc07d956114c2dc313026
 }

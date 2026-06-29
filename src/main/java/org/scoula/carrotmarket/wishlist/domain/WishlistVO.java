@@ -1,8 +1,5 @@
 package org.scoula.carrotmarket.wishlist.domain;
 
-<<<<<<< HEAD
-public class WishlistVO {
-=======
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,5 +16,4 @@ public class WishlistVO {
     private Integer userId;
     private Integer productId;
     private Date createdAt;
->>>>>>> 2f65b79ac5946ca1434dc07d956114c2dc313026
 }
