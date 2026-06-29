@@ -27,10 +27,6 @@ public class WishlistController {
         model.addAttribute("wishlist", service.get(wishlistId));
     }
 
-    // 등록 화면
-    @GetMapping("/create")
-    public void create(){log.info("create");}
-
     // 등록 처리
     @PostMapping("/create")
     public String create(WishlistDTO wishlist){
