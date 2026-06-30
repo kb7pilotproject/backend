@@ -14,19 +14,19 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Builder
 public class CommentDTO {
-    private int CommentId;
-    private int ProductId;
-    private int UserId;
+    private int commentId;
+    private int productId;
+    private int userId;
     private String content;
-    private Timestamp CreatedAt;
+    private Timestamp createdAt;
 
     public CommentVO toVo() {
         return CommentVO.builder()
-                .CommentId(CommentId)
-                .ProductId(ProductId)
-                .UserId(UserId)
+                .commentId(commentId)
+                .productId(productId)
+                .userId(userId)
                 .content(content)
-                .CreatedAt(CreatedAt)
+                .createdAt(createdAt)
                 .build();
 
     }
@@ -34,11 +34,11 @@ public class CommentDTO {
     public static CommentDTO of(CommentVO vo) {
 
         return vo == null ? null : CommentDTO.builder()
-                .CommentId(vo.getCommentId())
-                .ProductId(vo.getProductId())
-                .UserId(vo.getUserId())
+                .commentId(vo.getCommentId())
+                .productId(vo.getProductId())
+                .userId(vo.getUserId())
                 .content(vo.getContent())
-                .CreatedAt(vo.getCreatedAt())
+                .createdAt(vo.getCreatedAt())
                 .build();
     }
 
