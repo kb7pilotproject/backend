@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.scoula.carrotmarket.product.mapper.ProductMapper">
+
+    <resultMap id="productResultMap" type="org.scoula.carrotmarket.product.domain.ProductVO">
+        <id property="productId" column="product_id" />
+        <result property="userId" column="user_id" />
+        <result property="title" column="title" />
+        <result property="price" column="price" />
+        <result property="imageUrl" column="image_url" />
+        <result property="category" column="category" />
+        <result property="description" column="description" />
+        <result property="status" column="status" />
+        <result property="createdAt" column="created_at" />
+    </resultMap>
+
+    <insert id="insert" parameterType="org.scoula.carrotmarket.product.domain.ProductVO" useGeneratedKeys="true" keyProperty="productId">
+        INSERT INTO product (user_id, title, price, image_url, category, description, status)
+        VALUES (#{userId}, #{title}, #{price}, #{imageUrl}, #{category}, #{description}, #{status})
+    </insert>
+
+    <select id="getList" resultMap="productResultMap">
+        SELECT product_id, user_id, title, price, image_url, category, description, status, created_at
+        FROM product
+        ORDER BY product_id DESC
+    </select>
+
+    <select id="read" parameterType="long" resultMap="productResultMap">
+        SELECT product_id, user_id, title, price, image_url, category, description, status, created_at
+        FROM product
+        WHERE product_id = #{productId}
+    </select>
+
+    <update id="update" parameterType="org.scoula.carrotmarket.product.domain.ProductVO">
+        UPDATE product
+        SET title = #{title},
+            price = #{price},
+            image_url = #{imageUrl},
+            category = #{category},
+            description = #{description},
+            status = #{status}
+        WHERE product_id = #{productId}
+    </update>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM product
+        WHERE product_id = #{productId}
+    </delete>
+
+</mapper>
