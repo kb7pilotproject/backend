@@ -13,9 +13,9 @@ import java.sql.Timestamp;
 @Builder
 
 public class CommentVO {
-    private int CommentId;
-    private int ProductId;
-    private int UserId;
+    private int commentId;
+    private int productId;
+    private int userId;
     private String content;
-    private Timestamp CreatedAt;
+    private Timestamp createdAt;
 }
