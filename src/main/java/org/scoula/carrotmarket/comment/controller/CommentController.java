@@ -21,10 +21,10 @@ public class CommentController {
 
     // 댓글 생성
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody CommentDTO comment) {
+    public ResponseEntity<String> insert(@RequestBody CommentDTO comment) {
         log.info("insert comment : " + comment);
         commentService.insert(comment);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("Success");
     }
 
     // 댓글 조회
@@ -43,18 +43,18 @@ public class CommentController {
 
     // 댓글 수정
     @PutMapping("/{commentId}")
-    public ResponseEntity<Void> update(@PathVariable int commentId, @RequestBody CommentDTO comment){
+    public ResponseEntity<String> update(@PathVariable int commentId, @RequestBody CommentDTO comment){
         log.info("update comment : " + comment);
         commentService.update(comment);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("Success");
     }
 
     // 댓글 삭제
     @DeleteMapping("/{commentId}")
-    public ResponseEntity<Void> delete(@PathVariable int commentId, @RequestBody CommentDTO comment){
+    public ResponseEntity<String> delete(@PathVariable int commentId, @RequestBody CommentDTO comment){
         log.info("delete comment : " + commentId);
         commentService.delete(comment);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("Success");
     }
     @GetMapping("/product/{productId}/count")
     public ResponseEntity<Integer> countByProductId(@PathVariable int productId){
