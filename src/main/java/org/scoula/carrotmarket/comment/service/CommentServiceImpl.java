@@ -15,8 +15,10 @@ public class CommentServiceImpl implements CommentService {
     private final CommentMapper commentMapper;
 
     @Override
-    public void insert(CommentDTO comment) {
-        commentMapper.insert(comment.toVo());
+    public CommentVO insert(CommentDTO comment) {  // 반환타입 void → CommentVO
+        CommentVO vo = comment.toVo();
+        commentMapper.insert(vo);   // insert 후 vo.commentId에 생성된 ID가 채워짐
+        return vo;
     }
 
     @Override

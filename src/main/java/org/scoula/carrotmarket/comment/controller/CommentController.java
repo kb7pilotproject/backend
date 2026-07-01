@@ -21,10 +21,10 @@ public class CommentController {
 
     // 댓글 생성
     @PostMapping
-    public ResponseEntity<String> insert(@RequestBody CommentDTO comment) {
+    public ResponseEntity<CommentVO> insert(@RequestBody CommentDTO comment) {
         log.info("insert comment : " + comment);
-        commentService.insert(comment);
-        return ResponseEntity.ok("Success");
+        CommentVO created = commentService.insert(comment);
+        return ResponseEntity.ok(created);
     }
 
     // 댓글 조회

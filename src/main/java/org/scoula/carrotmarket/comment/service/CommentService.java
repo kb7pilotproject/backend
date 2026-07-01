@@ -8,7 +8,7 @@ import java.util.List;
 public interface CommentService {
 
     // 댓글 등록
-    void insert(CommentDTO comment);
+    CommentVO insert(CommentDTO comment);
 
     // 댓글 단건 조회
     CommentVO select(int commentId);

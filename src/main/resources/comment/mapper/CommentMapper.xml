@@ -20,7 +20,15 @@
     </insert>
 
     <!-- 댓글 단건 조회 -->
-    <select id="selectByproductId" parameterType="int" resultMap="commentResultMap">
+    <select id="select" parameterType="int" resultMap="commentResultMap">
+        SELECT comment_id, product_id, user_id, content, created_at
+        FROM comment
+        WHERE comment_id = #{commentId}
+    </select>
+
+
+    <!-- 댓글 물건명으로 조회 -->
+    <select id="selectByProductId" parameterType="int" resultMap="commentResultMap">
         SELECT comment_id , product_id , user_id , content , created_at
         FROM comment
         WHERE product_id = #{productId}
