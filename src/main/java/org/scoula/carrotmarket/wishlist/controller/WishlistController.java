@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 @Log4j2
 @Controller
 @RequestMapping("/wishlist")
@@ -25,13 +24,13 @@ public class WishlistController {
     // 상세 조회
     @GetMapping("/get")
     public void get(@RequestParam("wishlistId") Integer wishlistId,
-                    Model model) {
+                    Model model){
         model.addAttribute("wishlist", service.get(wishlistId));
     }
 
     // 등록 처리
-    @PostMapping("/create")
-    public String create(WishlistDTO wishlist) {
+    @PostMapping("/create/{wishlistId}")
+    public String create(WishlistDTO wishlist){
         log.info("create : " + wishlist);
         service.create(wishlist);
         return "redirect:/wishlist/get?wishlistId=" + wishlist.getWishlistId();
@@ -39,9 +38,9 @@ public class WishlistController {
 
     // 수정
     @PostMapping("/update")
-    public String update(WishlistDTO wishlist, RedirectAttributes ra) {
-        if (service.update(wishlist)) {
-            ra.addFlashAttribute("result", "success");
+    public String update(WishlistDTO wishlist, RedirectAttributes ra){
+        if(service.update(wishlist)){
+            ra.addFlashAttribute("result","success");
         }
         return "redirect:/wishlist/get?wishlistId="
                 + wishlist.getWishlistId();
@@ -49,10 +48,11 @@ public class WishlistController {
 
     // 삭제
     @PostMapping("/delete")
-    public String delete(@RequestParam("wishlistId") Integer wishlistId, RedirectAttributes ra) {
-        if (service.delete(wishlistId)) {
-            ra.addFlashAttribute("result", "success");
+    public String delete(@RequestParam("wishlistId") Integer wishlistId, RedirectAttributes ra){
+        if(service.delete(wishlistId)){
+            ra.addFlashAttribute("result","success");
         }
         return "redirect:/";
     }
+
 }
