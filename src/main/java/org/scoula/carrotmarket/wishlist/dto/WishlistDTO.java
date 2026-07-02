@@ -12,6 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
 public class WishlistDTO {
     private Integer wishlistId;
     private Integer userId;

@@ -1,5 +1,6 @@
 package org.scoula.carrotmarket.wishlist.controller;
 
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.scoula.carrotmarket.wishlist.dto.WishlistDTO;
@@ -20,8 +21,8 @@ public class WishlistController {
 
     final private WishlistService service;
 
-    // 찜목록 상세 조회
-    @GetMapping("/{wishlistId}")
+    // 상세 조회
+    @GetMapping("/get")
     public void get(@RequestParam("wishlistId") Integer wishlistId,
                     Model model){
         model.addAttribute("wishlist", service.get(wishlistId));
