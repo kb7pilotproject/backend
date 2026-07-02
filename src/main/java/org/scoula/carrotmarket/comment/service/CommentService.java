@@ -20,7 +20,7 @@ public interface CommentService {
     void update(CommentDTO comment);
 
     // 댓글 삭제
-    void delete(CommentDTO comment);
+    boolean delete(CommentDTO comment);
 
     // 특정 상품의 댓글 수 카운트
     int countByProductId(int productId);

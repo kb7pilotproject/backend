@@ -18,7 +18,7 @@ public interface CommentMapper {
     void update(CommentVO comment);
 
     // 댓글 삭제
-    void delete(CommentVO comment);
+    int delete(CommentVO comment);
 
     // 특정 상품의 댓글 수 카운트
     int countByProductId(int productId);

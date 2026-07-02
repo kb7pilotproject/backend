@@ -37,8 +37,9 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void delete(CommentDTO comment) {
-        commentMapper.delete(comment.toVo());
+    public boolean delete(CommentDTO comment) {
+        int result = commentMapper.delete(comment.toVo());
+        return result > 0;
     }
 
     @Override

@@ -6,6 +6,7 @@ import lombok.extern.log4j.Log4j2;
 import org.scoula.carrotmarket.comment.domain.CommentVO;
 import org.scoula.carrotmarket.comment.dto.CommentDTO;
 import org.scoula.carrotmarket.comment.service.CommentService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,9 +54,13 @@ public class CommentController {
     @DeleteMapping("/{commentId}")
     public ResponseEntity<String> delete(@PathVariable int commentId, @RequestBody CommentDTO comment){
         log.info("delete comment : " + commentId);
-        commentService.delete(comment);
-        return ResponseEntity.ok("Success");
+        boolean deleted = commentService.delete(comment);
+        if (!deleted) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("존재하지 않는 댓글입니다");
+        }
+        return ResponseEntity.ok("댓글 삭제 성공");
     }
+
     @GetMapping("/product/{productId}/count")
     public ResponseEntity<Integer> countByProductId(@PathVariable int productId){
         log.info("count comments by productId " + productId);
