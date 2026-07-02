@@ -32,12 +32,29 @@ import java.util.List;
 public class WebConfig implements WebMvcConfigurer {
 
     @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("http://localhost:5173")
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
-                .allowedHeaders("*")
-                .allowCredentials(true);
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class[]{org.scoula.carrotmarket.config.RootConfig.class};
+        // new int[] {1, 2, 3}
+    }
+
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class[]{ServletConfig.class};
+    }
+
+    //프론트컨트롤러 호출 주소 설정
+    //@WebServlet("/")와 같은 역할
+    @Override
+    protected String[] getServletMappings() {
+        return new String[]{"/"};
+    }
+
+    // POSTbody문자인코딩필터설정-UTF-8설정
+    protected Filter[] getServletFilters() {
+        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+        characterEncodingFilter.setEncoding("UTF-8");
+        characterEncodingFilter.setForceEncoding(true);
+        return new Filter[]{characterEncodingFilter};
     }
 
     @Override
