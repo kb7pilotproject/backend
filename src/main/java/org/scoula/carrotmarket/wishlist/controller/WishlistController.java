@@ -20,15 +20,15 @@ public class WishlistController {
 
     final private WishlistService service;
 
-    // 상세 조회
-    @GetMapping("/get")
+    // 찜목록 상세 조회
+    @GetMapping("/{wishlistId}")
     public void get(@RequestParam("wishlistId") Integer wishlistId,
                     Model model){
         model.addAttribute("wishlist", service.get(wishlistId));
     }
 
     // 등록 처리
-    @PostMapping("/create")
+    @PostMapping("/create/{wishlistId}")
     public String create(WishlistDTO wishlist){
         log.info("create : " + wishlist);
         service.create(wishlist);
