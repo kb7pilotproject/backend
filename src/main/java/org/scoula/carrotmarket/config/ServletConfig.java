@@ -13,13 +13,12 @@ import org.springframework.web.servlet.view.JstlView;
 
 @EnableWebMvc
 @ComponentScan(basePackages = {
-        "org.scoula.controller",
-        "org.scoula.exception",
-        "org.scoula.board.controller"
+        "org.scoula.carrotmarket", //추가
+        "org.scoula.carrotmarket.user.controller", // 추가
+        "org.scoula.exception"
 })
 public class ServletConfig implements WebMvcConfigurer {
         //스프링 내부에서 사용하는 서블릿(jsp)와 관련된 설정하는 파일.
-
         //Servlet 3.0 이상 파일 업로드 사용시
         @Bean //메서드를 호출했을 때 싱글톤빈을 만들어 리턴해주세요.
         public MultipartResolver multipartResolver() {

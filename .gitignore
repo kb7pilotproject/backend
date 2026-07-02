@@ -42,5 +42,5 @@ bin/
 ### Mac OS ###
 .DS_Store
 
-**/application.properties
 **/log4jdbc.log4j2.properties
+**/application.properties
